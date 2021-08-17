@@ -1,0 +1,18 @@
+.todo-app {
+  display: flex;
+  flex-direction: column;
+
+  &__new-task {
+    flex-basis: 45%;
+  }
+
+  &__task-list {
+    flex-basis: 55%;
+  }
+}
+
+@media (min-width: 992px) {
+  .todo-app {
+    flex-direction: row;
+  }
+}

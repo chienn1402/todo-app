@@ -1,0 +1,75 @@
+$control-corder-color: #ced4da;
+$control-corder-color-hover: #337ab7;
+$color-invalid: #dc3545;
+
+.task-form {
+  padding: 1rem;
+
+  &__header {
+    text-align: center;
+  }
+
+  &__row {
+    display: flex;
+    margin: 0 -0.5rem;
+
+    > div {
+      flex-basis: 50%;
+      margin: 0 0.5rem;
+    }
+  }
+
+  &__group {
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    margin-bottom: 0 !important;
+    font-weight: 500;
+  }
+
+  &__control {
+    display: block;
+    border: 1px solid $control-corder-color;
+    outline: none;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    width: 100%;
+
+    &:focus {
+      border-color: $control-corder-color-hover;
+    }
+
+    & ~ .error-message {
+      display: none;
+    }
+
+    &.form-invalid {
+      border-color: $color-invalid;
+
+      & ~ .error-message {
+        display: block;
+        font-size: 0.8rem;
+        color: $color-invalid;
+      }
+    }
+  }
+
+  .date-picker {
+    position: relative;
+
+    &__toggle-button {
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-55%);
+      border: none;
+      background: transparent;
+      padding: 0;
+
+      & > img {
+        width: 1.2rem;
+      }
+    }
+  }
+}

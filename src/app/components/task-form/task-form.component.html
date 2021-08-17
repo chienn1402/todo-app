@@ -1,0 +1,72 @@
+<div class="task-form">
+  <h2 class="task-form__header" *ngIf="!isFormEdit">New Task</h2>
+  
+  <form [formGroup]="formGroup">
+    <div class="task-form__group">
+      <label for="title" class="task-form__label"> Title </label>
+      <input
+        id="title"
+        class="task-form__control control"
+        placeholder="Add new task ..."
+        formControlName="title"
+        [ngClass]="{
+          'form-invalid':
+            formGroup.controls?.title?.invalid &&
+            formGroup.controls?.title?.touched
+        }"
+      />
+      <div
+        class="error-message"
+        *ngIf="formGroup.controls?.title?.errors?.required"
+      >
+        Title is required.
+      </div>
+    </div>
+  
+    <div class="task-form__group">
+      <label for="description" class="task-form__label"> Description </label>
+      <textarea
+        id="description"
+        class="task-form__control control"
+        formControlName="description"
+      ></textarea>
+    </div>
+    <div class="task-form__row">
+      <div class="task-form__group">
+        <label for="due-date" class="task-form__label"> Due Date </label>
+        <div class="date-picker">
+          <input
+            bsDatepicker
+            #dueDatepicker="bsDatepicker"
+            id="due-date"
+            class="task-form__control control"
+            formControlName="dueDate"
+            [bsConfig]="bsDateConfig"
+            [minDate]="minDueDate"
+          />
+          <button
+            class="date-picker__toggle-button"
+            (click)="dueDatepicker.toggle()"
+            [attr.aria-expanded]="dueDatepicker.isOpen"
+            type="button"
+          >
+            <img src="assets/icons/calendar.png" alt="Toggle date picker">
+          </button>
+        </div>
+      </div>
+  
+      <div class="task-form__group">
+        <label for="priority" class="task-form__label"> Priority </label>
+        <select
+          id="priority"
+          class="task-form__control control"
+          formControlName="priority"
+        >
+          <option *ngFor="let priority of priorities" [value]="priority.value">
+            {{ priority.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
