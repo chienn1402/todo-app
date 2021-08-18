@@ -12,6 +12,7 @@ export class TaskComponent implements OnInit, OnChanges {
   @Input() selected: boolean = false;
   @Input() unselectTrigger = false;
 
+  @Output() updateTask = new EventEmitter<Task>()
   @Output() removeTask = new EventEmitter();
   @Output() toggleSelect = new EventEmitter()
 
@@ -32,8 +33,9 @@ export class TaskComponent implements OnInit, OnChanges {
     this.collapsed = !this.collapsed;
   }
 
-  updateTask(task: Task) {
+  onUpdateTask(task: Task) {
     this.task = { ...this.task, ...task };
+    this.updateTask.emit(this.task);
   }
 
   onRemoveTask() {

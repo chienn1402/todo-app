@@ -70,6 +70,6 @@
       </div>
     </div>
 
-    <button class="task-form__button">{{ isFormEdit ? 'Update' : 'Add' }}</button>
+    <button class="task-form__button" [disabled]="!formGroup.dirty">{{ isFormEdit ? 'Update' : 'Add' }}</button>
   </form>
 </div>

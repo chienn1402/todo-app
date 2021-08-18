@@ -22,6 +22,6 @@
   </div>
 
   <div class="task__body" *ngIf="!collapsed">
-    <app-task-form [task]="task" (updateTask)="updateTask($event)"></app-task-form>
+    <app-task-form [task]="task" (updateTask)="onUpdateTask($event)"></app-task-form>
   </div>
 </div>

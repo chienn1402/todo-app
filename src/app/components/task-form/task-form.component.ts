@@ -68,18 +68,29 @@ export class TaskFormComponent implements OnInit {
       return;
     }
 
+    const formValue = this.formGroup.value;
+    formValue.dueDate = this.formatDate(formValue.dueDate);
     if (!this.isFormEdit) {
-      this.addTask.emit({ ...this.formGroup.value, isCompleted: false });
+      this.addTask.emit({ ...formValue, isCompleted: false });
       this.resetForm();
       return;
     }
 
-    this.updateTask.emit(this.formGroup.value);
+    this.updateTask.emit(formValue);
   }
 
   resetForm() {
     this.formGroup.reset();
     this.formGroup.get('dueDate').setValue(this.DEFAULT_DUE_DATE);
     this.formGroup.get('priority').setValue(PriorityEnum.NORMAL);
+  }
+
+  formatDate(dateStr: string) {
+    if (!dateStr || dateStr === 'Invalid Date') {
+      return '';
+    }
+
+    const date = new Date(dateStr);
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   }
 }

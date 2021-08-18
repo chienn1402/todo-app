@@ -9,6 +9,7 @@
     <app-task
       [task]="task"
       [unselectTrigger]="unselectTrigger"
+      (updateTask)="onUpdateTask($event, i)"
       (removeTask)="removeTask(i)"
       (toggleSelect)="onToggleSelect(i)"
     ></app-task>

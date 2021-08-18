@@ -22,6 +22,10 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  onUpdateTask(task: Task, index: number) {
+    this.tasks.splice(index, 1, task);
+  }
+
   removeTask(index: number) {
     this.tasks.splice(index, 1);
     if (this.selectedIndexes.includes(index)) {
