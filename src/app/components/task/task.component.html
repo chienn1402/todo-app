@@ -1,1 +1,27 @@
-<p>task works!</p>
+<div class="task">
+  <div class="task__header">
+    <div>
+      <button class="task__checkbox" (click)="onToggleSelect()">
+        <ng-container *ngIf="selected; else unselect">
+          <img src="assets/icons/check-mark.png" alt="Selected">
+        </ng-container>
+        <ng-template #unselect>
+          <img src="assets/icons/dry-clean.png" alt="Unselect">
+        </ng-template>
+      </button>
+      <span class="task__title" [ngClass]="{ 'task__title--completed': task.isCompleted }">{{ task?.title }}</span>
+    </div>
+    <div>
+      <button class="task__action task__action--primary" (click)="toggleShowFormEdit()">
+        Detail
+      </button>
+      <button class="task__action task__action--danger" (click)="onRemoveTask()">
+        Remove
+      </button>
+    </div>
+  </div>
+
+  <div class="task__body" *ngIf="!collapsed">
+    <app-task-form [task]="task" (updateTask)="updateTask($event)"></app-task-form>
+  </div>
+</div>

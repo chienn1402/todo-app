@@ -1,0 +1,52 @@
+@import '/src/assets/styles/variable';
+@import '/src/assets/styles/mixin';
+
+.task {
+  margin: 0 -1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid $color-secondary;
+
+    > div {
+      display: flex;
+      align-items: center;
+
+      > .task__checkbox {
+        flex-basis: 24px;
+
+        > img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__title {
+    margin-left: 0.5rem;
+
+    &--completed {
+      text-decoration: line-through;
+    }
+  }
+
+  &__action {
+    @include card-action;
+  }
+
+  &__checkbox {
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+
+  &__body ::ng-deep {
+    .task-form {
+      box-shadow: none;
+      border-radius: 0;
+      border-top: 1px solid #ced4da;
+    }
+  }
+}

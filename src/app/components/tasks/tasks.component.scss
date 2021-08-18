@@ -1,7 +1,47 @@
+@import '/src/assets/styles/variable';
+@import '/src/assets/styles/mixin';
+
 .tasks {
-  padding: 1rem;
+  @include card;
+  padding-bottom: 5rem;
+  position: relative;
+  min-height: 97vh;
 
   &__header {
     text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  &__search-bar {
+    margin-bottom: 2.5rem;
+  }
+
+  &__bulk-action {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 1.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 0.5rem 0.5rem;
+    background: #f1f1f1;
+  }
+
+  &__action {
+    border: none;
+    color: #fff;
+    border-radius: 0.25rem;
+    padding: 0.25rem 1rem;
+
+    &--primary {
+      background: #337ab7;
+    }
+
+    &--danger {
+      background: red;
+      margin-left: 0.5rem;
+    }
   }
 }

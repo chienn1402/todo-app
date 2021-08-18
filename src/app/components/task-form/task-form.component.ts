@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   PriorityEnum,
   PriorityEnumLabel,
 } from 'src/app/constants/priority.enum';
 import { SelectItem } from 'src/app/models/select-item.model';
+import { Task } from 'src/app/models/task.model';
 import { whiteSpaceValidator } from 'src/app/validators/white-space.validator';
 import { environment } from 'src/environments/environment';
 
@@ -15,11 +16,18 @@ import { environment } from 'src/environments/environment';
 })
 export class TaskFormComponent implements OnInit {
   @Input() task: Task;
+
+  @Output() addTask = new EventEmitter<Task>();
+  @Output() updateTask = new EventEmitter();
+
   formGroup: FormGroup;
   priorities: SelectItem[];
+
   isFormEdit = false;
   bsDateConfig = environment.bsDateConfig;
   minDueDate = new Date();
+
+  readonly DEFAULT_DUE_DATE = new Date();
 
   constructor(private fb: FormBuilder) {}
 
@@ -32,13 +40,16 @@ export class TaskFormComponent implements OnInit {
     this.formGroup = this.fb.group({
       title: ['', whiteSpaceValidator],
       description: [''],
-      dueDate: [new Date()],
+      dueDate: [this.DEFAULT_DUE_DATE],
       priority: [PriorityEnum.NORMAL],
     });
 
     if (this.task) {
       this.isFormEdit = true;
-      this.formGroup.patchValue(this.task);
+      this.formGroup.patchValue({
+        ...this.task,
+        dueDate: new Date(this.task.dueDate)
+      });
     }
   }
 
@@ -49,5 +60,26 @@ export class TaskFormComponent implements OnInit {
         label: PriorityEnumLabel[PriorityEnum[key]],
       };
     });
+  }
+
+  onSubmit() {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
+      return;
+    }
+
+    if (!this.isFormEdit) {
+      this.addTask.emit({ ...this.formGroup.value, isCompleted: false });
+      this.resetForm();
+      return;
+    }
+
+    this.updateTask.emit(this.formGroup.value);
+  }
+
+  resetForm() {
+    this.formGroup.reset();
+    this.formGroup.get('dueDate').setValue(this.DEFAULT_DUE_DATE);
+    this.formGroup.get('priority').setValue(PriorityEnum.NORMAL);
   }
 }

@@ -1,9 +1,11 @@
-<div class="todo-app todo-app-container">
-  <div class="todo-app__new-task">
-    <app-task-form></app-task-form>
-  </div>
-
-  <div class="todo-app__task-list">
-    <app-tasks></app-tasks>
+<div class="todo-app-container">
+  <div class="todo-app">
+    <div class="todo-app__new-task">
+      <app-task-form (addTask)="addTask($event)"></app-task-form>
+    </div>
+  
+    <div class="todo-app__task-list">
+      <app-tasks [tasks]="tasks"></app-tasks>
+    </div>
   </div>
 </div>

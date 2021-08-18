@@ -1,3 +1,37 @@
 <div class="tasks">
   <h2 class="tasks__header">Task List</h2>
+
+  <div class="tasks__search-bar">
+    <app-search-bar (search)="onSearchChange($event)"></app-search-bar>
+  </div>
+
+  <div *ngFor="let task of tasks | nearestDueDate | searchBy: query; index as i">
+    <app-task
+      [task]="task"
+      [unselectTrigger]="unselectTrigger"
+      (removeTask)="removeTask(i)"
+      (toggleSelect)="onToggleSelect(i)"
+    ></app-task>
+  </div>
+
+  <div class="tasks__bulk-action">
+    <div class="tasks__bulk-action--left">Bulk Action:</div>
+
+    <div class="tasks__bulk-action--right">
+      <button
+        class="tasks__action tasks__action--primary"
+        [disabled]="!selectedIndexes.length"
+        (click)="bulkDoneAction()"
+      >
+        Done
+      </button>
+      <button
+        class="tasks__action tasks__action--danger"
+        [disabled]="!selectedIndexes.length"
+        (click)="bulkRemoveAction()"
+      >
+        Remove
+      </button>
+    </div>
+  </div>
 </div>

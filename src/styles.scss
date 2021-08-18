@@ -6,10 +6,21 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+body {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding-top: 1rem;
+}
+
 select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+}
+
+[disabled] {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .todo-app-container {

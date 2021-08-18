@@ -8,6 +8,9 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { SearchByPipe } from './pipes/search-by.pipe';
+import { NearestDueDatePipe } from './pipes/nearest-due-date.pipe';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     TasksComponent,
     TaskComponent,
     TaskFormComponent,
+    SearchBarComponent,
+    SearchByPipe,
+    NearestDueDatePipe,
   ],
   imports: [
     BrowserModule,

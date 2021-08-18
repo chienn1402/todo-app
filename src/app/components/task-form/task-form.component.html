@@ -1,9 +1,8 @@
 <div class="task-form">
   <h2 class="task-form__header" *ngIf="!isFormEdit">New Task</h2>
   
-  <form [formGroup]="formGroup">
+  <form [formGroup]="formGroup" [autocomplete]="'off'" (ngSubmit)="onSubmit()">
     <div class="task-form__group">
-      <label for="title" class="task-form__label"> Title </label>
       <input
         id="title"
         class="task-form__control control"
@@ -12,7 +11,8 @@
         [ngClass]="{
           'form-invalid':
             formGroup.controls?.title?.invalid &&
-            formGroup.controls?.title?.touched
+            (formGroup.controls?.title?.touched ||
+            formGroup.controls?.title?.dirty)
         }"
       />
       <div
@@ -28,10 +28,11 @@
       <textarea
         id="description"
         class="task-form__control control"
+        rows="5"
         formControlName="description"
       ></textarea>
     </div>
-    <div class="task-form__row">
+    <div class="task-form__group task-form__row">
       <div class="task-form__group">
         <label for="due-date" class="task-form__label"> Due Date </label>
         <div class="date-picker">
@@ -68,5 +69,7 @@
         </select>
       </div>
     </div>
+
+    <button class="task-form__button">{{ isFormEdit ? 'Update' : 'Add' }}</button>
   </form>
 </div>

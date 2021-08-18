@@ -1,12 +1,13 @@
-$control-corder-color: #ced4da;
-$control-corder-color-hover: #337ab7;
-$color-invalid: #dc3545;
+@import '/src/assets/styles/variable';
+@import '/src/assets/styles/mixin';
 
 .task-form {
+  @include card;
   padding: 1rem;
 
   &__header {
     text-align: center;
+    margin-bottom: 1rem;
   }
 
   &__row {
@@ -29,30 +30,28 @@ $color-invalid: #dc3545;
   }
 
   &__control {
-    display: block;
-    border: 1px solid $control-corder-color;
-    outline: none;
-    border-radius: 0.25rem;
-    padding: 0.25rem 0.5rem;
-    width: 100%;
-
-    &:focus {
-      border-color: $control-corder-color-hover;
-    }
+    @include form-control;
 
     & ~ .error-message {
       display: none;
     }
 
     &.form-invalid {
-      border-color: $color-invalid;
+      border-color: $color-danger;
 
       & ~ .error-message {
         display: block;
         font-size: 0.8rem;
-        color: $color-invalid;
+        color: $color-danger;
       }
     }
+  }
+
+  &__button {
+    @include card-action;
+    background: $color-primary;
+    width: 100%;
+    display: block;
   }
 
   .date-picker {

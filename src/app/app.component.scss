@@ -1,13 +1,16 @@
 .todo-app {
   display: flex;
   flex-direction: column;
+  margin: 0 -0.5rem;
 
   &__new-task {
     flex-basis: 45%;
+    margin: 0 0.5rem;
   }
 
   &__task-list {
     flex-basis: 55%;
+    margin: 0 0.5rem;
   }
 }
 
